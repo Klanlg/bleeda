@@ -23,6 +23,7 @@ jobs:
           build.bat x64
           release.bat
           7z a D:\arll.7z -ir!*.obj -ir!*.txt
+          move D:\arll.7z release\release\
         shell: cmd
       
       
@@ -32,7 +33,6 @@ jobs:
           name: x86rel
           path: |
             release/release
-            D:\arll.7z
           if-no-files-found: error
 
  
