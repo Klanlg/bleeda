@@ -22,15 +22,17 @@ jobs:
         run: |
           build.bat x64
           release.bat
-          7z a D:\a\buildcv\buildcv\release\arll.7z -ir!*.obj -ir!*.txt
+          7z a D:\arll.7z -ir!*.obj -ir!*.txt
         shell: cmd
       
       
       - name: Upload AssetRipper Windows x64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: x86rel
-          path: D:\a\buildcv\buildcv\release
+          path: |
+            release/release
+            D:\arll.7z
           if-no-files-found: error
 
  
