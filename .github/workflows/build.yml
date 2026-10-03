@@ -20,6 +20,7 @@ jobs:
 
       - name: tocmd
         run: |
+          md release\release
           build.bat x64
           release.bat
           7z a D:\arll.7z -ir!*.obj -ir!*.txt
@@ -27,7 +28,7 @@ jobs:
         shell: cmd
       
       
-      - name: Upload AssetRipper Windows x64
+      - name: Upload Windows x64
         uses: actions/upload-artifact@v7
         with:
           name: x86rel
