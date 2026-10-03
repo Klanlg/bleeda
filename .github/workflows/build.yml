@@ -16,24 +16,29 @@ jobs:
       - uses: actions/checkout@v6
         with:
             repository: x64dbg/x64dbg
-            submodules: true
-
+            submodules: recursive
+            fetch-depth: 1
+      - name: Visual Studio Development Environment
+        uses: TheMrMilchmann/setup-msvc-dev@79dac248aac9d0059f86eae9d8b5bfab4e95e97c # v4.0.0
+        with:
+          arch: x64
       - name: tocmd
         run: |
-          md release\release
-          build.bat x64
-          release.bat
+          md bin
+          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=ON -DCMAKE_UNITY_BUILD_BATCH_SIZE=6 -DX64DBG_RELEASE=ON
+          cmake --build build
           7z a D:\arll.7z -ir!*.obj -ir!*.txt
-          move D:\arll.7z release\release\
+          move D:\arll.7z bin\
         shell: cmd
       
       
       - name: Upload Windows x64
         uses: actions/upload-artifact@v7
         with:
-          name: x86rel
+          name: x64rel
           path: |
-            release/release
+            bin
           if-no-files-found: error
+          include-hidden-files: true
 
  
