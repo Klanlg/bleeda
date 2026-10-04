@@ -24,11 +24,12 @@ jobs:
           arch: x64
       - name: tocmd
         run: |
-          md bin
+          md vin
           cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=OFF -DCMAKE_UNITY_BUILD_BATCH_SIZE=6 -DX64DBG_RELEASE=ON
           cmake --build build
-          7z a D:\arll.7z -ir!*obj -ir!*log -ir!*lib
-          move D:\arll.7z bin\
+          rd /s /q build\_deps
+          7z a D:\arll.7z build
+          move D:\arll.7z vin\
         shell: cmd
       
       
@@ -37,7 +38,7 @@ jobs:
         with:
           name: x64rel
           path: |
-            bin
+            vin
           if-no-files-found: error
           include-hidden-files: true
 
