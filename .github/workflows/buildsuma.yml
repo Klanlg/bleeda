@@ -46,9 +46,9 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: x64rel
-          path: |
-            vin
-          if-no-files-found: error
-          include-hidden-files: true
+          path: vin\arll.7z
+          archive: false
+          #if-no-files-found: error
+          #include-hidden-files: true
 
  
