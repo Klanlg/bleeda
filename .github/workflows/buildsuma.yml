@@ -1,0 +1,48 @@
+name: sumatrapbb
+
+on:
+  workflow_dispatch:
+    inputs:
+      opencv-version:
+        description: dxc
+        required: true
+        default: 4.5.2
+
+jobs:
+  publish_windows_x64:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+            repository: sumatrapdfreader/sumatrapdf
+            ref: '3.2rel'
+            submodules: recursive
+            fetch-depth: 1
+      - name: Visual Studio Development Environment
+        uses: TheMrMilchmann/setup-msvc-dev@79dac248aac9d0059f86eae9d8b5bfab4e95e97c # v4.0.0
+        with:
+          arch: x64
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: 1.13.4
+      - name: tocmd
+        run: |
+          md vin
+          .\doit.bat -ci
+          7z a D:\arll.7z -ir!*lib -ir!*nja -ir!*obj
+          move D:\arll.7z vin\
+        shell: cmd
+      
+      
+      - name: Upload Windows x64
+        uses: actions/upload-artifact@v7
+        with:
+          name: x64rel
+          path: |
+            vin
+          if-no-files-found: error
+          include-hidden-files: true
+
+ 
