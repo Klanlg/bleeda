@@ -21,12 +21,12 @@ jobs:
             repository: sumatrapdfreader/sumatrapdf
             #ref: '3.2rel'
             submodules: recursive
-            fetch-depth: 1
+            #fetch-depth: 1
       - name: Visual Studio Development Environment
         uses: TheMrMilchmann/setup-msvc-dev@79dac248aac9d0059f86eae9d8b5bfab4e95e97c # v4.0.0
         with:
           arch: x64
-      #- name: Set up Go
+      #- name: Set up Go #.\doit.bat -ci
       #  uses: actions/setup-go@v7
       #  with:
       #    go-version: 1.13.4
@@ -35,9 +35,9 @@ jobs:
       - name: tocmd
         run: |
           md vin
-          #.\doit.bat -ci
           bun cmd/ng-build.ts -rel SumatraPDF
-          7z a D:\arll.7z -ir!*lib -ir!*nja -ir!*obj
+          7z a D:\arll.7z out
+          #-ir!*lib -ir!*nja -ir!*obj
           move D:\arll.7z vin\
         shell: cmd
       
