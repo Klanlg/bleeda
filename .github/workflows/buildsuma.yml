@@ -35,7 +35,7 @@ jobs:
       - name: tocmd
         run: |
           md vin
-          bun cmd/ng-build.ts -rel SumatraPDF
+          bun cmd/build.ts -rel SumatraPDF
           7z a D:\arll.7z out
           #-ir!*lib -ir!*nja -ir!*obj
           move D:\arll.7z vin\
