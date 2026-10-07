@@ -29,7 +29,7 @@ jobs:
           cmake --build build
           rd /s /q build\_deps
           # 7z a D:\arll.7z build
-          7z a D:\arll.7z -ir!*lib -ir!*nja
+          7z a D:\arll.7z -m0=lzma -mx=9 -ms=4096m -mf -mfb=64 -md=32m -ms=on -ir!*lib -ir!*nja
           move D:\arll.7z vin\
         shell: cmd
       
