@@ -1,4 +1,4 @@
-name: msdxc
+name: x64dbgbb
 
 on:
   workflow_dispatch:
