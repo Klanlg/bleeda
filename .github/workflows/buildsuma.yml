@@ -37,7 +37,8 @@ jobs:
           md vin
           bun cmd/build.ts -rel
           #bun cmd/ng-build.ts -rel SumatraPDF
-          7z a D:\arll.7z out -xr!*.pdb
+          del out\rel64\embedded.lzsa
+          7z a -mqs -m0=lzma -mx=9 -ms=4096m -mf -mfb=64 -md=32m -ms=on D:\arll.7z out -xr!*.pdb
           #-ir!*lib -ir!*nja -ir!*obj
           move D:\arll.7z vin\
         shell: cmd
