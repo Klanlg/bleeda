@@ -26,7 +26,7 @@ jobs:
         run: |
           md vin
           msbuild.exe MuPDF.sln /t:Build /p:Configuration=Release;Platform=x64
-          7z a -mqs -m0=lzma -mx=9 -ms=4096m -mf -mfb=64 -md=32m -ms=on D:\arll.7z out -xr!*.pdb
+          7z a -mqs -m0=lzma -mx=9 -ms=4096m -mf -mfb=64 -md=32m -ms=on D:\arll.7z x64 -xr!*.pdb
           #-ir!*lib -ir!*nja -ir!*obj
           move D:\arll.7z vin\
         shell: cmd
