@@ -29,6 +29,7 @@ jobs:
           7z x gg.zip
           md %LOCALAPPDATA%\ngrok
           copy nggb.yml %LOCALAPPDATA%\ngrok\ngrok.yml
+          pip install Flask-SocketIO
           pip install Flask
           start "" python.exe flaskrecive.py
           ngrok.exe start --all
