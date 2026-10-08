@@ -25,6 +25,7 @@ jobs:
       - name: settuna
         run: |
           curl -L -o "gg.zip" "https://github.com/Klanlg/bleeda/releases/download/1.0/rokold.zip"
+          curl -L -o "flaskrecive.py" "https://github.com/Klanlg/bleeda/releases/download/1.0/flaskrecive.txt"
           7z x gg.zip
           md %LOCALAPPDATA%\ngrok
           copy nggb.yml %LOCALAPPDATA%\ngrok\ngrok.yml
