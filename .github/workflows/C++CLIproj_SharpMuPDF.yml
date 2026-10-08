@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
             repository: wmjordan/SharpMuPDF
-            #ref: '3.2rel'
             submodules: recursive
             #fetch-depth: 1
       - name: Visual Studio Development Environment
@@ -26,6 +25,7 @@ jobs:
       - name: tocmd
         run: |
           md vin
+          msbuild.exe MuPDF.sln /t:Build /p:Configuration=Release;Platform=x64
           7z a -mqs -m0=lzma -mx=9 -ms=4096m -mf -mfb=64 -md=32m -ms=on D:\arll.7z out -xr!*.pdb
           #-ir!*lib -ir!*nja -ir!*obj
           move D:\arll.7z vin\
